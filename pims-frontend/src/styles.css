@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.mat-error {
+  color: #dc3545 !important;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  background-color: #dc3545 !important;
+}

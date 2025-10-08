@@ -1,0 +1,37 @@
+<div class="feedback-section py-5" style="background-color: #f0f4ff;">
+  <div class="container">
+    <p class="text-center fs-4 mb-4 text-dark" data-aos="fade-down">We value your feedback</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card feedback-card border-0 shadow-sm" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card-body p-4">
+            <h3 class="text-center mb-4 text-primary">Send Feedback</h3>
+
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <!-- Message Field -->
+              <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-up">
+                <mat-label>Your Message</mat-label>
+                <textarea matInput formControlName="message" rows="5" placeholder="Share your thoughts..." class="bg-light"></textarea>
+                <mat-error *ngIf="form.get('message')?.hasError('required')">
+                  Message is required
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Buttons -->
+              <div class="d-flex justify-content-end gap-3 mt-4" data-aos="fade-up" data-aos-delay="200">
+               
+                <button class="btn btn-send-box" type="submit" [disabled]="form.invalid || submitting">
+                  {{ submitting ? 'Sending...' : 'Send' }}
+                </button>
+                <button class="btn btn-cancel-box" type="button" (click)="cancel()">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+/* Card Styling */
+.issue-card {
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fef9f7, #e3f6f5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.issue-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.issue-card-header {
+  background: linear-gradient(90deg, #6bc1ff, #81e7f7);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Buttons hover */
+button.mat-raised-button:hover {
+  background-color: #4a90e2 !important;
+  color: #fff !important;
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
+
+button.mat-stroked-button:hover {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
+
+/* Form field styling */
+.mat-form-field {
+  background-color: #ffffffcc;
+  border-radius: 8px;
+  padding: 0 5px;
+}
+
+/* Validation Errors & Red Asterisk */
+::ng-deep .mat-error {
+  color: #dc3545 !important;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  background-color: #dc3545 !important;
+}
+
+::ng-deep .mat-form-field-required .mat-form-field-label::after {
+  content: "*";
+  color: #dc3545;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+
+/* Force red underline and error message for description field */
+::ng-deep .invalid-description .mat-form-field-underline {
+  background-color: red !important;
+}
+
+::ng-deep .invalid-description .mat-form-field-wrapper .mat-form-field-flex {
+  border-bottom: 2px solid red !important;
+}
+
+::ng-deep .invalid-description .mat-error {
+  color: red !important;
+  font-weight: 600;
+}

@@ -1,0 +1,44 @@
+.feedback-section {
+  background-color: #f0f4ff; /* Soft pastel blue */
+}
+
+.feedback-card {
+  border-radius: 1rem;
+  background-color: #eaf6ff; /* Light card color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 2rem rgba(206, 193, 193, 0.1);
+  border-color: rgb(125, 110, 110);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1), 0 0 0.5rem rgba(244, 33, 33, 0.2);
+
+}
+
+.btn-send-box {
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-send-box:hover {
+  background-color: #357ab8;
+}
+
+.btn-cancel-box {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancel-box:hover {
+  background-color: #f5c6cb;
+}
