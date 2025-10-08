@@ -1,0 +1,330 @@
+<div class="dashboard-wrapper">
+  <!-- Navigation Header -->
+<nav class="navbar navbar-expand-lg navbar-light navbar-lightgreen sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="#">PIMS</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeSection === 'home'"
+            (click)="scrollToSection('home')"
+          >
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeSection === 'issues'"
+            (click)="scrollToSection('issues')"
+          >
+            Issues
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeSection === 'about'"
+            (click)="scrollToSection('about')"
+          >
+            About
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeSection === 'services'"
+            (click)="scrollToSection('services')"
+          >
+            Services
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Left Content -->
+        <div class="col-lg-6 hero-content">
+          <h1 class="hero-title">
+            Transforming Ideas Into Strategic Business Solutions
+          </h1>
+          <p class="hero-description">
+            We partner with forward-thinking communities to accelerate growth,
+            optimize operations, and unlock their full potential through innovative
+            consulting approaches and data-driven insights.
+          </p>
+          
+          <div class="hero-actions">
+            <button 
+              class="btn btn-primary btn-lg px-4"
+              routerLink="/user/report-issue"
+            >
+              Start Your Journey
+            </button>
+          
+          <button class="btn btn-primary btn-lg px-4" routerLink="/user/feedback">Give Feedback</button>
+            </div>
+        </div>
+<!-- Right Image & Stats -->
+<div class="col-lg-6 hero-visual">
+  <div class="hero-image-wrapper position-relative">
+    <img
+      [src]="heroUrl"
+      alt="PIMS Dashboard"
+      class="hero-image img-fluid rounded shadow"
+      (error)="onImageError($event)"
+    />
+
+    <!-- Stats Overlay -  Bottom right-->
+    <div class="stats-overlay-card position-absolute ">
+
+      <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Successful Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Issues Section -->
+  <section id="issues" class="issues-section">
+    <div class="container">
+      <!-- Status Overview -->
+      <div class="row g-4 mb-5">
+        <div class="col-md-4" *ngFor="let block of statusBlocks">
+          <mat-card class="status-card" [ngClass]="statusClass(block.title)">
+            <mat-card-content class="text-center">
+              <h3 class="status-count mb-2">{{ block.count }}</h3>
+              <p class="status-title mb-0">{{ block.title }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Issues List -->
+      <div class="issues-list">
+        <h2 class="section-title mb-4">Your Issues</h2>
+        
+        <div class="row">
+          <div class="col-12">
+            <mat-card 
+              *ngFor="let issue of issues"
+              class="issue-card mb-3"
+            >
+              <mat-card-content>
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <div class="issue-info flex-grow-1">
+                    <h5 class="issue-title mb-1">{{ issue.title }}</h5>
+                    <p class="issue-date text-muted mb-0">
+                      {{ issue.created_at | date: 'medium' }}
+                    </p>
+                  </div>
+                  <span 
+                    class="issue-badge ms-3" 
+                    [ngClass]="statusClass(issue.status)"
+                  >
+                    {{ issue.status }}
+                  </span>
+                </div>
+                
+                <p class="issue-description mb-2">{{ issue.description }}</p>
+                
+                <div 
+                  *ngIf="issue.admin_comment"
+                  class="admin-comment mt-3"
+                >
+                  <strong>Admin Response:</strong> {{ issue.admin_comment }}
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <div *ngIf="issues.length === 0" class="empty-state text-center py-5">
+              <i class="bi bi-inbox display-1 text-muted mb-3"></i>
+              <h4 class="text-muted">No Issues Yet</h4>
+              <p class="text-secondary">Start by reporting your first issue to get things moving.</p>
+              <button class="btn btn-primary mt-3" routerLink="/user/report-issue" type="button">
+                Report Issue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+<section id="about" class="about-section bg-light py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Text Column -->
+      <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+        <h2 class="section-title mb-4 text-dark">About PIMS</h2>
+        <p class="lead mb-4 text-muted">
+          Panchayat Issue Management System (PIMS) is a revolutionary platform designed 
+          to bridge the gap between citizens and local governance.
+        </p>
+        <p class="mb-4 text-muted">
+          We empower communities by providing a transparent, efficient, and user-friendly 
+          system for reporting, tracking, and resolving local issues. Our mission is to 
+          ensure every voice is heard and every concern is addressed promptly.
+        </p>
+
+        <!-- Feature Highlights -->
+        <div class="about-features">
+          <div class="feature-item d-flex align-items-start mb-3">
+            <div class="feature-icon-wrapper me-3">
+              <div class="feature-icon bg-success text-white rounded-circle p-2">
+                <i class="bi bi-check2 fs-5"></i>
+              </div>
+            </div>
+            <div class="feature-content">
+              <strong class="text-dark">Transparent Process</strong>
+              <p class="mb-0 text-muted small">Track your issues in real-time with complete visibility.</p>
+            </div>
+          </div>
+
+          <div class="feature-item d-flex align-items-start mb-3">
+            <div class="feature-icon-wrapper me-3">
+              <div class="feature-icon bg-primary text-white rounded-circle p-2">
+                <i class="bi bi-check2 fs-5"></i>
+              </div>
+            </div>
+            <div class="feature-content">
+              <strong class="text-dark">Quick Resolution</strong>
+              <p class="mb-0 text-muted small">Direct communication with authorities for faster results.</p>
+            </div>
+          </div>
+
+          <div class="feature-item d-flex align-items-start">
+            <div class="feature-icon-wrapper me-3">
+              <div class="feature-icon bg-warning text-white rounded-circle p-2">
+                <i class="bi bi-check2 fs-5"></i>
+              </div>
+            </div>
+            <div class="feature-content">
+              <strong class="text-dark">Community Driven</strong>
+              <p class="mb-0 text-muted small">Building better neighborhoods together through collaboration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image Column -->
+      <div class="col-lg-6" data-aos="fade-left">
+        <img 
+          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800" 
+          alt="About PIMS" 
+          class="img-fluid rounded shadow"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+ <!-- Services Section -->
+<section id="services" class="services-section py-5 bg-white">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="section-title mb-3 text-dark">Our Services</h2>
+      <p class="lead text-muted small">Smart tools for better community management</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Issue Reporting -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="service-bubble bg-teal text-dark text-center p-4">
+          <i class="bi bi-pencil-square fs-2 mb-3"></i>
+          <h5 class="mb-2">Issue Reporting</h5>
+          <p class="text-muted small">
+            Empower citizens to report local issues like potholes, broken streetlights, or sanitation concerns with ease. Our intuitive interface ensures every submission is clear, trackable, and routed to the right authority for resolution.
+          </p>
+        </div>
+      </div>
+
+      <!-- Real-Time Tracking -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="service-bubble bg-mint text-dark text-center p-4">
+          <i class="bi bi-code-slash fs-2 mb-3"></i>
+          <h5 class="mb-2">Real-Time Tracking</h5>
+          <p class="text-muted small">
+            Stay updated on the progress of reported issues with live status updates, notifications, and resolution timelines. Transparency and accountability are built into every step of the process.
+          </p>
+        </div>
+      </div>
+
+      <!-- Community Engagement -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="service-bubble bg-lightgreen text-dark text-center p-4">
+          <i class="bi bi-graph-up-arrow fs-2 mb-3"></i>
+          <h5 class="mb-2">Community Engagement</h5>
+          <p class="text-muted small">
+            Foster meaningful dialogue between residents and local leaders. Use polls, feedback forms, and discussion boards to gather insights and build consensus on community priorities.
+          </p>
+        </div>
+      </div>
+
+      <!-- Team Leadership -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+        <div class="service-bubble bg-softgreen text-dark text-center p-4">
+          <i class="bi bi-people-fill fs-2 mb-3"></i>
+          <h5 class="mb-2">Team Leadership</h5>
+          <p class="text-muted small">
+            Equip local leaders with tools to manage teams, delegate tasks, and monitor performance. Streamline operations and encourage collaboration across departments and volunteers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Innovation -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+        <div class="service-bubble bg-lightcyan text-dark text-center p-4">
+          <i class="bi bi-lightbulb fs-2 mb-3"></i>
+          <h5 class="mb-2">Innovation</h5>
+          <p class="text-muted small">
+            Introduce smart solutions like AI-powered analytics, sensor-based alerts, and predictive maintenance. PIMS helps communities evolve with technology and stay ahead of civic challenges.
+          </p>
+        </div>
+      </div>
+
+      <!-- Architecture -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
+        <div class="service-bubble bg-lightlime text-dark text-center p-4">
+          <i class="bi bi-gear-fill fs-2 mb-3"></i>
+          <h5 class="mb-2">Architecture</h5>
+          <p class="text-muted small">
+            Built on a secure, scalable infrastructure that supports high availability and performance. Our modular design ensures seamless integration with existing systems and future upgrades.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer bg-dark text-white py-4">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 PIMS. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
