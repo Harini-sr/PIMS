@@ -1,0 +1,19 @@
+table {
+  background-color: white;
+}
+table th {
+  background-color: lightgreen;
+  color: green;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+table,
+th,
+td {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+tr:hover td {
+  background-color: #f8f9fa;
+}

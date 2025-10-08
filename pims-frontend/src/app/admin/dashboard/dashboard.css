@@ -1,0 +1,26 @@
+img{
+    border-radius: 50px;
+}
+button{
+    border-radius: 10px;
+}
+.section {
+  border-radius: 30px;
+}
+.about{
+    border-radius: 20px;
+    box-shadow:3px 2px rgba(0,0,0,0.3);
+
+}
+h1,h3, p{
+      font-family: 'Poppins', sans-serif;
+
+}
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }

@@ -1,0 +1,63 @@
+ <div class="container vh-100 d-flex justify-content-center align-items-center">
+ <div class="w-100" style="max-width: 500px;">
+    <form class="p-4 border  shadow" style="max-width: 500px;" [formGroup]="loginForm">
+    <h3 class="text-center text-success">Login Form</h3>
+    <hr>
+    <div class="form-group mb-3">
+      <label for="username">User Name</label>
+      <input type="text" class="form-control" formControlName="username"  id="username"/>
+      <div
+        *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched"
+        class="text-danger"
+      >
+        Name is required
+      </div>  
+      <div
+        *ngIf="loginForm.get('username')?.errors?.['pattern'] && loginForm.get('username')?.touched"
+        class="text-danger"
+      >
+        Name must contain only letters and spaces.
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="">Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+      <div
+        *ngIf="
+          loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+        "
+        class="text-danger"
+      >
+        Password is required
+      </div>
+    </div>
+<!-- <div class="form-group">
+  <label>Role</label>
+  <select class="form-select" formControlName="role">
+    <option selected disabled>Select role..</option>
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+    <div
+    *ngIf="loginForm.get('role')?.invalid && loginForm.get('role')?.touched"
+    class="text-danger"
+  >
+    Role is required
+  </div>
+</div> -->
+<div>
+    <!--  <button class="btn btn-primary form-control" [disabled]="loginForm.invalid" (click)="addDetails()" >Submit</button>
+    -->
+    <button
+  class="btn btn-success form-control"
+  [disabled]="loginForm.invalid || isLoading"
+  (click)="addDetails()"
+>
+  {{ isLoading ? 'Logging in...' : 'Submit' }}
+</button>
+ 
+    <button class="btn btn-danger form-control mt-2" (click)="reset()">Clear</button>
+</div>
+  </form>
+ </div>
+</div>
