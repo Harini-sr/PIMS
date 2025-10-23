@@ -1,20 +1,12 @@
 import { Component, signal } from '@angular/core';
-<<<<<<< HEAD
-import { RouterLink, RouterOutlet } from '@angular/router';
-
-
-
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
-=======
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterModule],
->>>>>>> 5d3874768f28706555dee3b10b4fe0c8dce50fa5
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

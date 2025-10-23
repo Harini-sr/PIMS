@@ -1,0 +1,77 @@
+# version: "3.9"
+
+# services:
+#   gateway:
+#     build: ./pims-backend/api-gateway
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       - admin
+#       - user
+
+#   admin:
+#     build: ./pims-backend/admin-server
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - NODE_ENV=production
+
+#   user:
+#     build: ./pims-backend/user
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       - NODE_ENV=production
+
+#   mongo:
+#     image: mongo:latest
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo-data:/data/db
+
+# volumes:
+#   mongo-data:
+
+
+version: "3.9"
+
+services:
+  gateway:
+    build: ./pims-backend/api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - admin
+      - user
+
+  admin:
+    build: ./pims-backend/admin-server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  user:
+    build: ./pims-backend/user
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  frontend:
+    build: ./pims-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - gateway
+
+volumes:
+  mongo-data:

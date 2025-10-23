@@ -3,5 +3,10 @@
     "express": "^5.1.0",
     "mongoose": "^8.19.1",
     "path": "^0.12.7"
-  }
+  },
+  "scripts": {
+  "start": "node index.js",
+  "test": "echo \"No tests specified\" && exit 1"
+}
+
 }

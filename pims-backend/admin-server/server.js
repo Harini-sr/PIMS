@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
     const userModel = require('./model/login');
-
+const issuesRouter = require('./routes/issueRoutes');
 
  
- const app = express()
+ const app = express();
+ app.use(express.json());
+
  const port = 3000;
  
 if (process.env.NODE_ENV !== 'test') {
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV !== 'test') {
   }
 }
  
- 
+ app.use('/api/issues', issuesRouter);
  
  
  mongoose.connect('mongodb+srv://Mohana:%40Mohana2004@cluster0.wemrs4h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
@@ -41,7 +43,7 @@ if (process.env.NODE_ENV !== 'test') {
  })
 createDefaultAdmin();
  
- app.listen(300, ()=>{
+ app.listen(port, ()=>{
     console.log(`server is running on http://localhost:${port}` );
    
  })

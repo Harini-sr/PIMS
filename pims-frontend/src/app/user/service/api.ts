@@ -13,7 +13,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getUserIssues(userId: number): Observable<Issue[]> {
+  getUserIssues(userId: any): Observable<Issue[]> {
     return this.http.get<Issue[]>(`${this.baseUrl}/user/issues?user_id=${userId}`, {
       withCredentials: true
     });

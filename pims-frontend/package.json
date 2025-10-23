@@ -22,10 +22,7 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@angular/animations": "^20.3.3",
->>>>>>> 5d3874768f28706555dee3b10b4fe0c8dce50fa5
     "@angular/cdk": "^20.2.7",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
@@ -37,6 +34,7 @@
     "aos": "^2.3.4",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
+    "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

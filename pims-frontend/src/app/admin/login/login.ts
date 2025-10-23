@@ -32,7 +32,7 @@ loginForm!: FormGroup;
         Validators.pattern(/^[A-Za-z\s]+$/),
       ]),
       password: new FormControl('', Validators.required),
-      //  role: new FormControl('', Validators.required),
+        role: new FormControl('', Validators.required),
     });
   }
   isLoading = false;

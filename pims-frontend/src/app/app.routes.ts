@@ -7,7 +7,6 @@ export const routes: Routes = [
           canActivate: [authGuard],
     data: { role: 'admin' },
 
-<<<<<<< HEAD
     },
     {
       path: '', 
@@ -38,13 +37,12 @@ export const routes: Routes = [
       loadComponent: () => import('./admin/login/login').then(m => m.Login),
       
   
-    }
-=======
-export const routes: Routes = [
-    { path: '', redirectTo: 'user/dashboard', pathMatch: 'full' },
-  { path: 'user/dashboard', loadComponent: () => import('./user/dashboard/dashboard').then(m => m.UserDashboardComponent) },
-  { path: 'user/report-issue', loadComponent: () => import('./user/issue-form/issue-form').then(m => m.IssueFormComponent) },
-  { path: 'user/feedback', loadComponent: () => import('./user/feedback-form/feedback-form').then(m => m.FeedbackFormComponent) },
-  { path: '**', redirectTo: 'user/dashboard' }
->>>>>>> 5d3874768f28706555dee3b10b4fe0c8dce50fa5
+    },
+  { path: '', redirectTo: 'user/dashboard', pathMatch: 'full' },
+  { path: 'user/dashboard', loadComponent: () => import('./user/dashboard/dashboard').then(m => m.UserDashboardComponent),
+    data: { role: 'user' }, },
+  { path: 'user/report-issue', loadComponent: () => import('./user/issue-form/issue-form').then(m => m.IssueFormComponent),  
+    data: { role: 'user' }, },
+  { path: 'user/feedback', loadComponent: () => import('./user/feedback-form/feedback-form').then(m => m.FeedbackFormComponent)},
+  
 ];
