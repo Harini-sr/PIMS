@@ -1,0 +1,8 @@
+<!-- navigation -->
+<app-nav-admin></app-nav-admin>
+
+<div class="container" *ngFor="let feedback of feedbacks">
+<p class="alert alert-danger">
+  {{feedback.message}}
+</p>
+</div>

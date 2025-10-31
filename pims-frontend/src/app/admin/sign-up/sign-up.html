@@ -1,0 +1,77 @@
+
+<!-- Sign Up -->
+
+ <div class="container vh-100 d-flex justify-content-center align-items-center">
+ <div class="w-100" style="max-width: 500px;">
+    <form class="p-4 border  shadow" style="max-width: 500px;" [formGroup]="signUpForm" (ngSubmit)="signUpFormSub()">
+    <h3 class="text-center text-success">Sign Up</h3>
+    <hr>
+    <!-- name -->
+    <div class="form-group mb-3">
+      <label for="name">User Name</label>
+      <input type="text" class="form-control" formControlName="name"  id="name"/>
+      <div
+        *ngIf="signUpForm.get('name')?.errors?.['required'] && signUpForm.get('name')?.touched"
+        class="text-danger"
+      >
+        Name is required
+      </div>  
+      <div
+        *ngIf="signUpForm.get('name')?.errors?.['pattern'] && signUpForm.get('name')?.touched"
+        class="text-danger"
+      >
+        Name must contain only letters and spaces.
+      </div>
+    </div>
+    <!-- password -->
+    <div class="form-group mb-3">
+      <label for="">Password</label>
+      <input type="password" class="form-control" formControlName="spassword" />
+  <div *ngIf="signUpForm.get('spassword')?.errors?.['required'] && signUpForm.get('spassword')?.touched" class="text-danger">
+  Password is required
+</div>
+<div *ngIf="signUpForm.get('spassword')?.errors?.['pattern'] && signUpForm.get('spassword')?.touched" class="text-danger">
+  Password must be at least 8 characters, include uppercase, lowercase, number, and special character
+</div>
+
+    </div>
+    <!-- email -->
+        <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" formControlName="email"  id="email"/>
+      <div *ngIf="signUpForm.get('email')?.errors?.['required'] && signUpForm.get('email')?.touched" class="text-danger">
+  Email is required
+</div>
+<div *ngIf="signUpForm.get('email')?.errors?.['email'] && signUpForm.get('email')?.touched" class="text-danger">
+  Please enter a valid email
+</div>
+
+  
+    </div>
+    <!-- number -->
+            <div class="form-group mb-3">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" formControlName="phone"  id="phone"/>
+      <div *ngIf="signUpForm.get('phone')?.errors?.['required'] && signUpForm.get('phone')?.touched" class="text-danger">
+  Phone number is required
+</div>
+<div *ngIf="signUpForm.get('phone')?.errors?.['pattern'] && signUpForm.get('phone')?.touched" class="text-danger">
+  Enter valid phone number (10-15 digits)
+</div>
+
+    </div>
+<div>
+    <button
+  class="btn btn-success form-control"
+  [disabled]="signUpForm.invalid"> 
+  Submit
+</button>
+ 
+    <button class="btn btn-danger form-control mt-2" (click)="reset()">Clear</button>
+</div>
+
+ <p class="text-center p-2"> Already have an account please <a (click)="moveLogin()" class="text-primary" style="cursor: pointer;">Login</a></p>
+  </form>
+
+ </div>
+</div>

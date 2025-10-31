@@ -1,26 +1,13 @@
-// export interface Issue {
-// date: string|number|Date;
-//   id: number;
-//   user_id: number;
-//   title: string;
-//   description: string;
-//   category: string;
-//   status: string;
-//   admin_comment?: string;
-//   created_at: string;
-// }
-
 
 export interface Issue {
-date: string|number|Date;
-  id: number;
-  user_id: number;
-  title: string;
-  description: string;
+  id?: string;
+  userId: string; 
+  name: string;
+  email: string;
+  date: string;
   issueType: string;
+  description: string;
   location: string;
-  category: string;
-  status: string;
-  admin_comment?: string;
-  created_at: string;
+  status:string;
 }
+

@@ -1,9 +1,20 @@
+
+<div class="container-fluid row bg-light">
+<div class="col-md-1">
+    <button class="btn btn-outline-success mt-4" (click)="back()">
+      <i class="bi bi-arrow-left me-2 " ></i> Back 
+    </button>
+</div>
+<div class="col-md-11">
+   <p class="text-center mb-4 fs-4 p-3 text-success" data-aos="fade-down">Fill out the issue here..</p>
+
+</div> 
+</div>
+
 <div class="container mt-4">
   <div class="row justify-content-center">
     <!-- <div class="col-30 col-sm-10 col-md-8 col-lg-6"> -->
 
-
-<p class="text-center mb-4 fs-4" data-aos="fade-down">Report an Issue</p>
 
 <div class="container mt-4" data-aos="fade-up" data-aos-delay="100">
   <div class="row justify-content-center">
@@ -19,7 +30,7 @@
 <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-right">
   <mat-label>Name</mat-label>
   <input matInput formControlName="name" />
-  <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+  <mat-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched "  style="color: red;"  >
     Please enter your name
   </mat-error>
 </mat-form-field>
@@ -28,7 +39,7 @@
 <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-left">
   <mat-label>Email</mat-label>
   <input matInput formControlName="email" />
-  <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+  <mat-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched"  style="color: red;">
     Please enter a valid email
   </mat-error>
 </mat-form-field>
@@ -39,12 +50,12 @@
   <input matInput [matDatepicker]="picker" formControlName="date" />
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
-  <mat-error *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">
+  <mat-error *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched"  style="color: red;">
     Please select the date of the issue
   </mat-error>
 </mat-form-field>
 
-    <!-- Issue Type -->
+<!-- Issue Type -->
 <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-right">
   <mat-label>Issue Type</mat-label>
   <mat-select formControlName="issueType">
@@ -53,10 +64,13 @@
     <mat-option value="Sanitation">Sanitation</mat-option>
     <mat-option value="Electricity">Electricity</mat-option>
   </mat-select>
-  <mat-error *ngIf="form.get('issueType')?.hasError('required') && form.get('issueType')?.touched">
+
+  <mat-error *ngIf="form.get('issueType')?.hasError('required') && form.get('issueType')?.touched" style="color: red;">
     Please select an issue type
   </mat-error>
 </mat-form-field>
+
+
 
 
 
@@ -64,7 +78,7 @@
             <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-left">
               <mat-label>Description</mat-label>
               <textarea matInput formControlName="description" rows="5"></textarea>
-              <mat-error *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">
+              <mat-error *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched"  style="color: red;">
                 Please provide a description
               </mat-error>
             </mat-form-field>
@@ -73,7 +87,7 @@
 <mat-form-field class="w-100 mb-3" appearance="fill" data-aos="fade-right">
   <mat-label>Location</mat-label>
   <input matInput formControlName="location" />
-  <mat-error *ngIf="form.get('location')?.hasError('required') && form.get('location')?.touched">
+  <mat-error *ngIf="form.get('location')?.hasError('required') && form.get('location')?.touched"  style="color: red;">
     Please enter the location
   </mat-error>
 </mat-form-field>

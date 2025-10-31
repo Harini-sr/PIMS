@@ -14,3 +14,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #dc3545 !important;
 }
 
+/* make mat-select dropdown panel appear above other content */
+.cdk-overlay-container {
+  z-index: 2000 !important;
+}
+
+/* optional: ensure error messages stay below */
+.mat-mdc-form-field-subscript-wrapper {
+  z-index: 1 !important;
+  position: relative;
+}
+.cdk-overlay-container {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* let underlying elements be interactive */
+  z-index: 999999 !important; /* super high */
+}
+
+.cdk-overlay-container .cdk-overlay-pane {
+  pointer-events: auto; /* enable interactions on overlays */
+  z-index: 999999 !important;
+  position: absolute !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

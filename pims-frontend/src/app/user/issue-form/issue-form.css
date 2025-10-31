@@ -11,12 +11,27 @@
 }
 
 .issue-card-header {
-  background: linear-gradient(90deg, #6bc1ff, #81e7f7);
+  /* background: linear-gradient(90deg, #6bc1ff, #81e7f7); */
+  background-color: lab(84.37% -17.09 15.91);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   font-weight: bold;
   color: #fff;
 }
+/* Fix mat-error overlapping mat-select panel */
+.mat-form-field {
+  display: block;
+}
+
+.mat-form-field-subscript-wrapper {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.mat-mdc-select-panel {
+  z-index: 1000 !important; /* keeps dropdown above errors */
+}
+
 
 /* Buttons hover */
 button.mat-raised-button:hover {

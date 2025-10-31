@@ -20,7 +20,7 @@ loginForm!: FormGroup;
   location: any;
   quantity: any;
   errorMessage: any;
- 
+
   constructor(
     private router: Router,
    /*  private service: Service, */
@@ -31,22 +31,22 @@ loginForm!: FormGroup;
         Validators.required,
         Validators.pattern(/^[A-Za-z\s]+$/),
       ]),
-      password: new FormControl('', Validators.required),
-        role: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
+
   }
   isLoading = false;
  
   addDetails() {
+    console.log("click");
+    
     this.isLoading = true;
-    if (this.loginForm.invalid) return;
+  if (this.loginForm.invalid) {
+    console.log("Form invalid:", this.loginForm.errors);  // Add this line for debugging
+    return;
+  }
  
-    this.http
-      .post<any>(
-        'https://backend-67bg.onrender.com/loginApi/login',
-        this.loginForm.value
-      )
-      .subscribe({
+    this.http.post<any>( 'http://localhost:3000/login', this.loginForm.value).subscribe({
         next: (res) => {
           console.log('Login response:', res);
  
@@ -60,8 +60,8 @@ loginForm!: FormGroup;
               this.router.navigate(['/dashboard']);
             }
           } else {
-            if (this.router.url !== '/user-dashboard') {
-              this.router.navigate(['/user-dashboard']);
+            if (this.router.url !== '/user/dashboard') {
+              this.router.navigate(['/user/dashboard']);
             }
           }
         },
@@ -76,4 +76,8 @@ loginForm!: FormGroup;
   reset() {
     this.loginForm.reset();
   }
+openSignUp(){
+  this.router.navigate(['/signUp'])
+}
+
 }

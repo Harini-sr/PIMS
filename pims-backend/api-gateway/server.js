@@ -44,6 +44,10 @@ app.use(
   })
 );
 
+// app.use("/api/feedback", (req, res, next) => {
+//   console.log("Gateway received request:", req.method, req.originalUrl);
+//   next();
+// });
 // Fallback
 app.use((req, res) => res.status(404).json({ message: "Not found on gateway" }));
 

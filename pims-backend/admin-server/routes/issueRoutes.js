@@ -1,19 +1,88 @@
 const express = require('express');
-const Issue = require('../model/issue'); // Make sure the filename matches
+const Issue = require('../model/issue');
 const router = express.Router();
+const Counter = require('../model/counterModel');
+const userModel = require('../model/login');
 
-// GET all issues
-router.get('/', async (req, res) => {
+// ✅ GET all issues (with pagination, search, and date filter)
+router.get('/getIssue', async (req, res) => {
   try {
-    const issues = await Issue.find();
-    res.json(issues);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const { search, date } = req.query;
+    const filter = {};
+
+    // 🔍 Search Filter
+    if (search && search.trim() !== '') {
+      const searchRegex = new RegExp(search, 'i');
+      filter.$or = [
+        { name: searchRegex },
+        { email: searchRegex },
+        { issueType: searchRegex },
+        { description: searchRegex },
+        { location: searchRegex },
+        { status: searchRegex },
+      ];
+    }
+
+    // 📅 Date Filter (supports both yyyy-MM-dd and dd-MM-yyyy)
+    if (date && date.trim() !== '') {
+      const [year, month, day] = date.split('-');
+      const altDate = `${day}-${month}-${year}`; // "17-10-2025"
+
+      // merge with existing $or if search exists
+      if (filter.$or) {
+        filter.$and = [
+          { $or: filter.$or },
+          {
+            $or: [
+              { date: { $regex: new RegExp(date, 'i') } },
+              { date: { $regex: new RegExp(altDate, 'i') } },
+            ],
+          },
+        ];
+        delete filter.$or;
+      } else {
+        filter.$or = [
+          { date: { $regex: new RegExp(date, 'i') } },
+          { date: { $regex: new RegExp(altDate, 'i') } },
+        ];
+      }
+    }
+
+    // 🧾 Fetch filtered + paginated issues
+    const issues = await Issue.find(filter)
+      .sort({ date: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await Issue.countDocuments(filter);
+
+    // 🧮 Summary counts (all-time)
+    const completedComplaints = await Issue.countDocuments({ status: 'closed' });
+    const inProgressComplaints = await Issue.countDocuments({ status: 'in-progress' });
+    const openComplaints = await Issue.countDocuments({ status: 'open' });
+
+    res.json({
+      flag: 1,
+      totalComplaints: total,
+      completedComplaints,
+      inProgressComplaints,
+      openComplaints,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      issues,
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Error fetching issues:', err);
+    res.status(500).json({ flag: 0, message: err.message });
   }
 });
 
-// GET single issue by ID
-router.get('/:id', async (req, res) => {
+// ✅ GET single issue by ID
+router.get('/getById/:id', async (req, res) => {
   try {
     const issue = await Issue.findById(req.params.id);
     if (!issue) return res.status(404).json({ message: 'Issue not found' });
@@ -23,35 +92,47 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// CREATE a new issue
-router.post('/', async (req, res) => {
-  console.log('Request body:', req.body); // debug: see what Postman sends
+// ✅ Helper for auto-increment ID
+async function getNextSequence(name) {
+  const counter = await Counter.findOneAndUpdate(
+    { name },
+    { $inc: { seq: 1 } },
+    { new: true, upsert: true }
+  );
+  return counter.seq;
+}
 
-  // Basic validation
-  if (!req.body || !req.body.name || !req.body.email) {
+// ✅ CREATE a new issue
+router.post('/', async (req, res) => {
+  const { name, email, date, issueType, description, location, status } = req.body;
+
+  if (!name || !email) {
     return res.status(400).json({ message: 'Name and Email are required' });
   }
 
-  const issue = new Issue({
-    id:req.body.id,
-    name: req.body.name,
-    email: req.body.email,
-    date: req.body.date || new Date(),
-    issueType: req.body.issueType || 'Other', // default
-    description: req.body.description || '',
-    location: req.body.location || '',
-    status: req.body.status || 'open' // default to open
-  });
-
   try {
-    const newIssue = await issue.save();
-    res.status(201).json(newIssue);
+    const nextSeq = await getNextSequence('issueId');
+    const issue = new Issue({
+      id: `id${nextSeq}`,
+      name,
+      email,
+      date: date
+        ? new Date(date).toISOString().split('T')[0] // store as yyyy-MM-dd
+        : new Date().toISOString().split('T')[0],
+      issueType: issueType || 'Other',
+      description: description || '',
+      location: location || '',
+      status: status || 'open',
+    });
+
+    const savedIssue = await issue.save();
+    res.status(201).json(savedIssue);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// UPDATE an issue by ID
+// ✅ UPDATE issue
 router.put('/:id', async (req, res) => {
   try {
     const updated = await Issue.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -62,7 +143,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE an issue by ID
+// ✅ DELETE issue
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await Issue.findByIdAndDelete(req.params.id);

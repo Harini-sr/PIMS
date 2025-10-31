@@ -12,38 +12,49 @@ export class ApiService {
   private baseUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {}
+getUserIssues(userId: number): Observable<Issue[]> {
+  return this.http.get<Issue[]>(`${this.baseUrl}/user/issues?userId=${userId}`, {
+    withCredentials: true
+  });
+}
 
-  getUserIssues(userId: any): Observable<Issue[]> {
-    return this.http.get<Issue[]>(`${this.baseUrl}/user/issues?user_id=${userId}`, {
-      withCredentials: true
-    });
-  }
+getIssueById(issueId: string): Observable<Issue> {
+  return this.http.get<Issue>(`${this.baseUrl}/user/issues/${issueId}`, {
+    withCredentials: true
+  }).pipe(
+    catchError(err => {
+      console.error('API Error (getIssueById):', err);
+      return throwError(() => new Error('Failed to fetch issue.'));
+    })
+  );
+}
 
   createIssue(issue: Partial<Issue>): Observable<Issue> {
-    console.log('Sending issue to:', `${this.baseUrl}/user/issues`);
-    console.log('Issue data:', issue);
-    
-    return this.http.post<Issue>(`${this.baseUrl}/user/issues`, issue, {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('API Error (createIssue):', error);
-        if (error.error instanceof ErrorEvent) {
-          console.error('Client-side error:', error.error.message);
-        } else {
-          console.error(`Backend returned code ${error.status}, body was:`, error.error);
-          if (error.status === 0) {
-            console.error('Possible CORS issue or server not reachable');
-          }
+  console.log('Sending issue to:', `${this.baseUrl}/user/issues`);
+  console.log('Issue data:', issue);
+  
+  return this.http.post<Issue>(`${this.baseUrl}/user/issues`, issue, {
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).pipe(
+    catchError((error: HttpErrorResponse) => {
+      console.error('API Error (createIssue):', error);
+      if (error.error instanceof ErrorEvent) {
+        console.error('Client-side error:', error.error.message);
+      } else {
+        console.error(`Backend returned code ${error.status}, body was:`, error.error);
+        if (error.status === 0) {
+          console.error('Possible CORS issue or server not reachable');
         }
-        return throwError(() => new Error('Failed to submit issue. Please check your connection and try again.'));
-      })
-    );
-  }
+      }
+      return throwError(() => new Error('Failed to submit issue. Please check your connection and try again.'));
+    })
+  );
+}
+
 
   submitFeedback(feedback: Partial<Feedback>): Observable<Feedback> {
     return this.http.post<Feedback>(`${this.baseUrl}/feedback`, feedback, {

@@ -2,35 +2,37 @@ const express = require('express');
 const mongoose = require('mongoose');
     const userModel = require('./model/login');
 const issuesRouter = require('./routes/issueRoutes');
-
+const cors = require('cors');
+const loginRoutes = require('./routes/loginRoutes')
  
  const app = express();
  app.use(express.json());
-
+app.use(cors());
  const port = 3000;
  
 if (process.env.NODE_ENV !== 'test') {
-  async function createDefaultAdmin() {
-  try {
-    const admin = await userModel.findOne({ username: 'admin' });
-    if (!admin) {
-      await userModel.create({
-        userId: 0,
-        username: 'admin',
-        password: 'admin123',
-        role: 'admin'
-      });
-      console.log('✅ Default admin created');
-    } else {
-      console.log('✔️ Admin already exists');
+ async function createDefaultAdmin() {
+    try {
+      const admin = await userModel.findOne({ username: 'admin' });
+      if (!admin) {
+        await userModel.create({
+          userId: 0,
+          username: 'admin',
+          password: 'admin123',
+          role: 'admin'
+        });
+        console.log('✅ Default admin created');
+      } else {
+        console.log('✔️ Admin already exists');
+      }
+    } catch (err) {
+      console.error('❌ Failed to create admin:', err.message);
     }
-  } catch (err) {
-    console.error('❌ Failed to create admin:', err.message);
   }
-}
- 
+
  app.use('/api/issues', issuesRouter);
- 
+   app.use('/', loginRoutes);
+
  
  mongoose.connect('mongodb+srv://Mohana:%40Mohana2004@cluster0.wemrs4h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
  .then(()=>{

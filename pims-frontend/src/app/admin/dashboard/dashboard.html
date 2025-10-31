@@ -9,12 +9,11 @@
       <div class="container">
         <h1 class="text-success">Panchayat Issue Management System</h1>
         <h3 class="text-secondary">Register ur complaints</h3>
-        <p class="p-2 text-secondary">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores sapiente sed veniam
-          debitis vitae minima dolorem perspiciatis odit officia, asperiores sint hic! Expedita
-          illum dolores corrupti aspernatur animi, dolorum atque!
-        </p>
-        <button class="btn btn-outline-success p-2">Register Now!</button>
+<p class="p-2 text-secondary text-justify">
+  The <strong>Panchayat Issue Management System</strong> is an innovative digital platform designed to simplify the process of reporting, tracking, and resolving local governance issues within rural communities. It empowers residents to directly communicate their concerns to Panchayat authorities, fostering greater transparency, accountability, and efficiency in problem-solving at the grassroots level.
+</p>
+
+        <button class="btn btn-outline-success p-2"><a routerLink="/issue-form" class="nav-link">Register Now!</a> </button>
       </div>
     </div>
 
@@ -38,7 +37,7 @@
           <h3 class="text-success"><strong>Total complaints</strong></h3>
         </div>
         <div class="card-body">
-          <h3>120</h3>
+          <h3>{{totalComplaints}}</h3>
         </div>
       </div>
     </div>
@@ -51,7 +50,7 @@
           <h3 class="text-success"><strong>completed complaints</strong></h3>
         </div>
         <div class="card-body">
-          <h3>50</h3>
+          <h3>{{completedComplaints}}</h3>
         </div>
       </div>
     </div>
@@ -61,10 +60,10 @@
     <div class="col-md-4">
       <div class="card about text-center shadow-sm p-4 border-0">
         <div class="card-title">
-          <h3 class="text-success"><strong>Total Panchayat</strong></h3>
+          <h3 class="text-success"><strong>In-progress</strong></h3>
         </div>
         <div class="card-body">
-          <h3>30</h3>
+          <h3>{{inProgressComplaints}}</h3>
         </div>
       </div>
     </div>
@@ -74,69 +73,28 @@
 <!-- services -->
 <div class="container-fluid mt-4 bg-light p-5">
   <div class="container section bg-white p-5">
-        <h3 class="text-success fw-bold mb-4">Our Services</h3>
-    <!-- Section 1 -->
+    <h3 class="text-success fw-bold mb-4">Our Services</h3>
 
-    <!-- Item 1 -->
-    <div class="d-flex align-items-center border-bottom py-3">
+
+    <div *ngFor="let item of items; let i = index" class="d-flex align-items-center border-bottom py-3">
+      <!-- Toggle button -->
       <button
         class="btn btn-outline-success rounded-circle p-0 d-flex justify-content-center align-items-center me-3"
         style="width: 32px; height: 32px"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#collapse1"
+        [attr.data-bs-target]="'#collapse' + i"
         aria-expanded="false"
-        aria-controls="collapse1"
+        [attr.aria-controls]="'collapse' + i"
       >
         <span class="fs-5 fw-bold">+</span>
       </button>
-      <div class="flex-grow-1">
-        <span class="fw-semibold">Google UX Design Professional Certificate</span>
-        <div id="collapse1" class="collapse mt-2 text-muted">
-          Learn UX fundamentals, wireframing, and usability testing through Google’s professional
-          program.
-        </div>
-      </div>
-    </div>
 
-    <!-- Item 2 -->
-    <div class="d-flex align-items-center border-bottom py-3">
-      <button
-        class="btn btn-outline-success rounded-circle p-0 d-flex justify-content-center align-items-center me-3"
-        style="width: 32px; height: 32px"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapse2"
-        aria-expanded="false"
-        aria-controls="collapse2"
-      >
-        <span class="fs-5 fw-bold">+</span>
-      </button>
+      <!-- Title and Details -->
       <div class="flex-grow-1">
-        <span class="fw-semibold">AWS Certified Solutions Architect</span>
-        <div id="collapse2" class="collapse mt-2 text-muted">
-          Covers cloud architecture principles and AWS best practices for scalable solutions.
-        </div>
-      </div>
-    </div>
-
-    <!-- Item 3 -->
-    <div class="d-flex align-items-center border-bottom py-3">
-      <button
-        class="btn btn-outline-success rounded-circle p-0 d-flex justify-content-center align-items-center me-3"
-        style="width: 32px; height: 32px"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapse3"
-        aria-expanded="false"
-        aria-controls="collapse3"
-      >
-        <span class="fs-5 fw-bold">+</span>
-      </button>
-      <div class="flex-grow-1">
-        <span class="fw-semibold">Certified Agile Project Manager</span>
-        <div id="collapse3" class="collapse mt-2 text-muted">
-          Learn agile methodologies, sprint planning, and stakeholder communication skills.
+        <span class="fw-semibold">{{ item.title }}</span>
+        <div [id]="'collapse' + i" class="collapse mt-2 text-muted">
+          {{ item.details }}
         </div>
       </div>
     </div>

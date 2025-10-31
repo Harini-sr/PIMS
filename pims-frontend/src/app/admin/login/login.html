@@ -1,8 +1,11 @@
- <div class="container vh-100 d-flex justify-content-center align-items-center">
+ 
+<!-- Login -->
+<div class="container vh-100 d-flex justify-content-center align-items-center">
  <div class="w-100" style="max-width: 500px;">
     <form class="p-4 border  shadow" style="max-width: 500px;" [formGroup]="loginForm">
     <h3 class="text-center text-success">Login Form</h3>
     <hr>
+    <!-- name -->
     <div class="form-group mb-3">
       <label for="username">User Name</label>
       <input type="text" class="form-control" formControlName="username"  id="username"/>
@@ -19,45 +22,35 @@
         Name must contain only letters and spaces.
       </div>
     </div>
+    <!-- password -->
     <div class="form-group mb-3">
-      <label for="">Password</label>
-      <input type="password" class="form-control" formControlName="password" />
-      <div
-        *ngIf="
-          loginForm.get('password')?.invalid && loginForm.get('password')?.touched
-        "
-        class="text-danger"
-      >
-        Password is required
-      </div>
-    </div>
-<!-- <div class="form-group">
-  <label>Role</label>
-  <select class="form-select" formControlName="role">
-    <option selected disabled>Select role..</option>
-    <option value="admin">Admin</option>
-    <option value="user">User</option>
-  </select>
-    <div
-    *ngIf="loginForm.get('role')?.invalid && loginForm.get('role')?.touched"
-    class="text-danger"
-  >
-    Role is required
+  <label for="">Password</label>
+  <input type="password" class="form-control" formControlName="password" />
+
+  <!-- Show this only if password is empty -->
+  <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="text-danger">
+    Password is required
   </div>
-</div> -->
+
+
+</div>
+
 <div>
-    <!--  <button class="btn btn-primary form-control" [disabled]="loginForm.invalid" (click)="addDetails()" >Submit</button>
-    -->
     <button
   class="btn btn-success form-control"
-  [disabled]="loginForm.invalid || isLoading"
   (click)="addDetails()"
 >
-  {{ isLoading ? 'Logging in...' : 'Submit' }}
+Submit
 </button>
  
     <button class="btn btn-danger form-control mt-2" (click)="reset()">Clear</button>
 </div>
+ 
+ <p class="text-center p-2">Don't have an account please
+  <a (click)="openSignUp()" class="text-primary" style="cursor: pointer;">Sign up</a>
+ 
+ </p>
+ 
   </form>
  </div>
 </div>

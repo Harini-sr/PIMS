@@ -7,3 +7,8 @@ nav ul li a{
     font-family: sans-serif;
     margin-left: 20px;
 }
+/* Custom CSS to center the dropdown menu */
+.dropdown-menu-center {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}

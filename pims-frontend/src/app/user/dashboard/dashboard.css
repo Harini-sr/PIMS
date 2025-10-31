@@ -10,26 +10,26 @@
 }
 .navbar-lightgreen {
   background-color:
-  lab(93.39% -14.84 8.08); /* soft pastel green */
+ #409d64 /* soft pastel green */
 }
 .navbar {
   transition: background-color 0.3s ease;
 }
 .nav-link {
-  color: #555;
+  color: black;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 6px;
+
 }
-section {
+/* section {
   padding-top: 120px;
   padding-bottom: 120px;
   min-height: 600px;
-}
+} */
 
 .nav-link.active {
-  background-color: #d0ebff;
-  color: #007bff;
+  border-bottom: 2px solid white;
+
   font-weight: 600;
 }
 .nav-list li {
@@ -47,47 +47,59 @@ section {
 .nav-list li {
   transition: all 0.3s ease;
 }
+.hero-section {
+  background-color: #f8f9fa; /* light gray background */
+}
+
+.hero-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1b1f24;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+.stats-overlay-card {
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+  margin-bottom: 8px;
+}
+
+.stat-number {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #007bff;
+}
+
 .hero-image {
-  width: 100%;
+ 
   height: auto;
   display: block;
   border-radius: 16px;
 }
 
-/* .stats-overlay-card {
-  bottom: 20px;
-  background-color: #fff;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-} */
-
-/* .stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #28a745;
-} */
-
-/* .stat-label {
-  font-size: 0.9rem;
-  color: #555;
-}
-.stat-label {
-  font-size: 0.9rem;
-  color: #555;
-} */
 
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 80px 0;
+
   position: relative;
   overflow: hidden;
 }
@@ -99,20 +111,20 @@ section {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.0'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   opacity: 0.4;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding-right: 40px;
+
 }
 
 .hero-title {
   font-size: 3rem;
   font-weight: 700;
-  color: #212529;
+  color: #409d64;
   line-height: 1.2;
   margin-bottom: 24px;
 }
@@ -262,7 +274,9 @@ section {
 
 /* Issues Section */
 .issues-section {
-  margin-top: 40px;
+  margin-top: 10px;
+  text-align: left;
+ 
 }
 
 .section-title {
@@ -296,43 +310,7 @@ section {
   position: relative;
   min-height: 600px; /* ensures space for overlay */
 }
-/* 
-.stats-overlay-card {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  display: flex;
-  gap: 2rem;
-} */
 
-/* .stat-item {
-  text-align: left;
-} */
-
-/* .stat-number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #28a745; /* Bold green */
-/* } */ 
-/* @media (max-width: 768px) {
-  .stats-overlay-card {
-    bottom: 20px;
-    right: 20px;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-} */
-
-/* .stat-label {
-  font-size: 1rem;
-  color: #555;
-} */
 
 .issue-info {
   flex: 1;
@@ -439,18 +417,6 @@ section {
   padding-bottom: 200px; /* ensures space for overlay */
 }
 
-/* .stats-overlay-card {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  text-align: left;
-  z-index: 10;
-} */
-
 .stat-title {
   color: #28a745; /* Bootstrap green */
   font-size: 1.5rem;
@@ -523,6 +489,18 @@ button {
   transform: translateY(-6px);
   box-shadow: 0 0.5rem 1rem rgba(0, 128, 0, 0.2);
 }
+.dropdown-item {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item i {
+  font-size: 1.2rem;      /* Make icons uniform */
+  line-height: 1;         /* Remove extra space */
+  width: 20px;            /* Fixed width for consistency */
+  text-align: center;     /* Center icon inside width */
+}
+
 
 /* Pastel background colors */
 .bg-teal       { background-color: #e0f7f7; }
@@ -542,55 +520,7 @@ button {
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
-/* @media (max-width: 768px) {
-  .stats-overlay-card {
-    bottom: 20px;
-    right: 20px;
-    padding: 0.75rem 1.5rem;
-  }
-} */
 
-/* .hero-image-wrapper {
-  position: relative;
-} */
-
-/* .stats-overlay-card {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  display: flex;
-  gap: 2rem;
-  z-index: 10;
-} */
-
-/* .stat-item {
-  text-align: left;
-}
-
-.stat-number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #28a745; /* Bold green */
-/* }  */
-/* 
-.stat-label {
-  font-size: 1rem;
-  color: #555;
-} */
-
-/* @media (max-width: 768px) {
-  .stats-overlay-card {
-    bottom: 20px;
-    right: 20px;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-} */
 .hero-image-wrapper {
   position: relative;
 }
@@ -623,7 +553,7 @@ button {
 
 .stat-label {
   font-size: 1rem;
-  color: #555;
+  color: #746d6d;
 }
 @media (max-width: 768px) {
   .stats-overlay-card {
