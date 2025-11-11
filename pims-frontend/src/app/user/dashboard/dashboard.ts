@@ -14,16 +14,18 @@ import { Issue } from '../models/issue';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { ChatbotComponent } from '../chatbot/chatbot';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatCardModule],
+  imports: [CommonModule, RouterModule, MatCardModule,ChatbotComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
 export class UserDashboardComponent implements OnInit {
-  issues: any;
+  issues: Issue[] = [];
+  chatMessages: { from: 'user' | 'bot', text: string }[] = [];
   activeSection: 'home' | 'issues' | 'about' | 'services' = 'home';
   role: string | null = null;
   heroUrl = '/assets/hero.jpg';
@@ -35,6 +37,15 @@ user:any;
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  
+navigateWithAuth(route: string): void {
+  if (!this.userId) { // or check this.username or this.role
+    alert('Please login to access this feature');
+    this.router.navigate(['/login']); // Redirect to login page
+  } else {
+    this.router.navigate([route]);
+  }
+}
 
   private onScroll = () => {
     const sections = ['home', 'issues', 'about', 'services'] as const;

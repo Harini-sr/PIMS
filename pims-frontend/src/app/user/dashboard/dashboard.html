@@ -89,10 +89,11 @@
             consulting approaches and data-driven insights.
           </p>
 
-          <div class="hero-actions">
-            <button class="btn btn-primary btn-lg px-4" routerLink="/user/report-issue">Report Issue</button>
-            <button class="btn btn-primary btn-lg px-4" routerLink="/user/feedback">Give Feedback</button>
-          </div>
+         <div class="hero-actions">
+  <button class="btn btn-primary btn-lg px-4" (click)="navigateWithAuth('/user/report-issue')">Report Issue</button>
+  <button class="btn btn-primary btn-lg px-4" (click)="navigateWithAuth('/user/feedback')">Give Feedback</button>
+</div>
+
         </div>
 
         <div class="col-lg-6 hero-visual">
@@ -124,15 +125,28 @@
       <div class="issues-list" *ngIf="role === 'user'"> 
         <h2 class="section-title mb-4 p-2 text-start" style="color:#409d64;">Your Issues</h2>
       
+
         <div class="container col-10">
           <mat-card *ngFor="let issue of issues" class="issue-card mb-3">
-            <mat-card-content>
+            <mat-card-content  >
               <p class="issue-description mb-2">{{ issue.description }}</p>
+              <p class="issue-status mb-0">
+        <strong>Status:</strong> 
+        <span [ngClass]="{
+          'text-warning': issue.status === 'Pending',
+          'text-success': issue.status === 'Resolved',
+          'text-danger': issue.status === 'Rejected'
+        }">
+          {{ issue.status }}
+        </span>
+      </p>
             </mat-card-content>
           </mat-card>
-        </div>
+        </div> 
 
-        <div *ngIf="issues.length === 0" class="empty-state text-center">
+
+        <div *ngIf="issues?.length === 0" class="empty-state text-center">
+
           <i class="bi bi-inbox display-1 text-muted mb-3"></i>
           <h4 class="text-muted">No Issues Yet</h4>
           <p class="text-secondary">Start by reporting your first issue to get things moving.</p>
@@ -308,7 +322,7 @@
   </div>
 </section>
 
-
+<app-chatbot></app-chatbot>
   <!-- Footer -->
   <footer class="footer  text-white py-4" style="background-color:#409d64;">
     <div class="container-fluid text-center">

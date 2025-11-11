@@ -1,0 +1,52 @@
+<div class="chatbot-container" [class.open]="isOpen">
+  <!-- Floating Button -->
+  <button class="chatbot-toggle-btn shadow-lg" (click)="toggleChat()">
+    <i class="bi bi-robot fs-3"></i>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chatbot-window card shadow-lg animate__animated animate__fadeInUp" *ngIf="isOpen">
+    <div class="chatbot-header d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-robot fs-4 me-2 text-light"></i>
+        <span class="fw-semibold text-light">PIMS Assistant</span>
+      </div>
+      <button class="btn btn-sm text-light minimize-btn" (click)="toggleChat()">
+        <i class="bi bi-dash-lg"></i>
+      </button>
+    </div>
+
+    <!-- <div class="chatbot-body" #messagesContainer>
+      <div *ngFor="let msg of chatMessages" [ngClass]="msg.from === 'user' ? 'user-message' : 'bot-message'">
+        {{ msg.text }}
+      </div> -->
+        <div class="chatbot-body" #messagesContainer>
+      <div *ngFor="let msg of chatMessages" [ngClass]="msg.from === 'user' ? 'user-message' : 'bot-message'">
+        <ng-container *ngIf="msg.imageUrl; else textBlock">
+          <img [src]="msg.imageUrl" alt="Generated image" class="chat-image"/>
+        </ng-container>
+        <ng-template #textBlock>
+          {{ msg.text }}
+        </ng-template>
+      </div>
+
+      <div class="typing-indicator" *ngIf="isTyping">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="chatbot-input d-flex align-items-center">
+      <input
+        type="text"
+        [(ngModel)]="userMessage"
+        placeholder="Type your message..."
+        (keyup.enter)="sendMessage()"
+        class="form-control border-0 shadow-none"
+      />
+      <button class="btn btn-success ms-2" (click)="sendMessage()">
+        <i class="bi bi-send-fill"></i>
+      </button>
+    </div>
+  </div>
+</div>
+ 
